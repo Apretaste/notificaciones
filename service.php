@@ -24,7 +24,7 @@ class Notificaciones extends Service
 		$subject = "Tienes $non_viewed notificaciones sin leer";
 		
 		if ($non_viewed * 1 === 1)
-			$subject = "Tienes una notificacion sin leeer";
+			$subject = "Tienes una notificacion sin leer";
 		
 		if ($non_viewed * 1 < 1)
 			$subject  = "Ultimas 50 notificaciones";
