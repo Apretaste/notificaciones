@@ -11,7 +11,7 @@ class Notificaciones extends Service
 	public function _main(Request $request)
 	{
 		
-		$sql = "SELECT * FROM _notifications WHERE email ='{$request->email}' ORDER BY inserted_date DESC LIMIT 50;";
+		$sql = "SELECT * FROM notifications WHERE email ='{$request->email}' ORDER BY inserted_date DESC LIMIT 50;";
 		$connection = new Connection();
 		$notifications = $connection->deepQuery($sql);
 		
@@ -38,7 +38,7 @@ class Notificaciones extends Service
 		$response->createFromTemplate('basic.tpl', $responseContent);
 		
 		// Mark as seen 
-		$connection->deepQuery("UPDATE _notifications SET viewed = 1 WHERE email ='{$request->email}'");
+		$connection->deepQuery("UPDATE notifications SET viewed = 1, viewed_date = CURRENT_TIMESTAMP WHERE email ='{$request->email}'");
 		
 		return $response;
 	}

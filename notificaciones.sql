@@ -1,4 +1,4 @@
-CREATE TABLE _notifications(
+CREATE TABLE notifications(
 	id int(11) not null primary key auto_increment,
 	email varchar(255) not null,
 	origin varchar(50),
