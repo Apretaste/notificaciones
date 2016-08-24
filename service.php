@@ -21,7 +21,7 @@ class Notificaciones extends Service
 		$non_viewed = $this->utils->getNumberOfNotifications($request->email);
 		
 		$response = new Response();
-		$subject = "Tienes $non_viewed notificaciones sin leeer";
+		$subject = "Tienes $non_viewed notificaciones sin leer";
 		
 		if ($non_viewed * 1 === 1)
 			$subject = "Tienes una notificacion sin leeer";
