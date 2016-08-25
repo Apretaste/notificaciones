@@ -3,10 +3,10 @@
 <table width="100%" cellpadding="5">
 {foreach from=$notificactions item=notif}
 	<tr  {if $notif@iteration is even}bgcolor="#F2F2F2"{/if}>
-		<td {if $notif->viewed === 0 || $notif->viewed === false || $notif->viewed === '0' || is_null($notif->viewed) || $notif->viewed === 'null' || empty($notif->viewed)} 
-			style="border-left:5px solid green;" 
-		{else} 
+		<td {if $notif->viewed == '1'} 
 			style="border-left:5px solid grey;" 
+		{else} 
+			style="border-left:5px solid green;" 
 		{/if}>
 		 <small>{$notif->inserted_date|date_format:"%B %e, %Y %l:%M %p"}</small><br/>
 		 {$notif->text} 

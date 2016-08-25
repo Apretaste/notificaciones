@@ -14,7 +14,7 @@ class Notificaciones extends Service
 		$sql = "SELECT * FROM notifications WHERE email ='{$request->email}' ORDER BY inserted_date DESC LIMIT 50;";
 		$connection = new Connection();
 		$notifications = $connection->deepQuery($sql);
-		
+
 		if ( ! is_array($notifications))
 			$notifications = array();
 		
