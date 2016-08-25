@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Apretaste!
+ * 
+ * Service NOTIFICACIONES
+ * 
+ * @author kumahacker <kumahavana@gmail.com>
+ *
+ */
 class Notificaciones extends Service
 {
 	/**
@@ -29,8 +37,14 @@ class Notificaciones extends Service
 		if ($non_viewed * 1 < 1)
 			$subject  = "Ultimas 50 notificaciones";
 				
-		$response->setResponseSubject($subject);
+		if (count($notifications) < 1)
+		{
+			$response->setResponseSubject("No tienes aun notificaciones.");
+			$response->createFromText("No tienes aun notificaciones. Servicios como Pizarra o Cupido, mensajes de otros usuarios o eventos del sistema tales como importantes cambios en Apretaste se le mostraran en esta secci&oacute;n para que siempre est&eacute; al tanto de lo que ocurre.");
+			return $response;
+		}
 		
+		$response->setResponseSubject($subject);
 		$responseContent = array(
 			'notificactions' => $notifications
 		);
