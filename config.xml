@@ -1,6 +1,6 @@
 <service>
 	<serviceName>notificaciones</serviceName>
-	<serviceDescription><![CDATA[Le muestra las ultimas notificaciones]]></serviceDescription>
+	<serviceDescription><![CDATA[Le muestra sus 50 &uacute;ltimas notificaciones]]></serviceDescription>
 	<creatorEmail>kumahavana@gmail.com</creatorEmail>
 	<serviceCategory>otros</serviceCategory>
 	<serviceUsage>
@@ -11,7 +11,7 @@
 			Para: {APRETASTE_EMAIL}
 			Asunto: NOTIFICACIONES
 
-			Recibir&aacute; una lista de las &uacute;ltimas notificaciones.
+			Recibir&aacute; una lista de sus &uacute;ltimas notificaciones.
 		]]>
 	</serviceUsage>
 </service>
