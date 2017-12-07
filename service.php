@@ -1,59 +1,47 @@
 <?php
 
 /**
- * Apretaste!
- * 
  * Service NOTIFICACIONES
- * 
  * @author kumahacker <kumahavana@gmail.com>
- *
  */
 class Notificaciones extends Service
 {
 	/**
-	 * Get the list of conversations
+	 * Get the list of notifications
 	 *
 	 * @param Request
 	 * @return Response
 	 * */
 	public function _main(Request $request)
 	{
-		
-		$sql = "SELECT * FROM notifications WHERE email ='{$request->email}' ORDER BY inserted_date DESC LIMIT 50;";
-		$connection = new Connection();
-		$notifications = $connection->deepQuery($sql);
-		
-		if ( ! is_array($notifications))
-			$notifications = array();
-		
-		$non_viewed = $this->utils->getNumberOfNotifications($request->email);
-		
-		$response = new Response();
-		$subject = "Tienes $non_viewed notificaciones sin leer";
-		
-		if ($non_viewed * 1 === 1)
-			$subject = "Tienes una notificacion sin leer";
-		
-		if ($non_viewed * 1 < 1)
-			$subject  = "Ultimas 50 notificaciones";
-				
-		if (count($notifications) < 1)
-		{
-			$response->setResponseSubject("No tienes aun notificaciones.");
-			$response->createFromText("No tienes aun notificaciones. Servicios como Pizarra o Cupido, mensajes de otros usuarios o eventos del sistema tales como importantes cambios en Apretaste se le mostraran en esta secci&oacute;n para que siempre est&eacute; al tanto de lo que ocurre.");
-			return $response;
+		// get the origins of the notifications if passed
+		// i.E.: NOTIFICACIONES pizarra nota chat
+		$origin = "";
+		if($request->query) {
+			foreach (explode(" ", $request->query) as $o) $origins[] = "origin LIKE '$o%'";
+			$origin = implode(" OR ", $origins);
+			$origin = "AND ($origin)";
 		}
-		
-		$response->setResponseSubject($subject);
-		$responseContent = array(
-			'notificactions' => $notifications
-		);
-		
-		$response->createFromTemplate('basic.tpl', $responseContent);
-		
-		// Mark as seen 
-		$connection->deepQuery("UPDATE notifications SET viewed = 1, viewed_date = CURRENT_TIMESTAMP WHERE email ='{$request->email}'");
-		
+
+		// create SQL to get notifications
+		$connection = new Connection();
+		$notifications = $connection->query("
+			SELECT *
+			FROM notifications
+			WHERE email='{$request->email}'
+			$origin
+			ORDER BY inserted_date DESC
+			LIMIT 20");
+
+		// mark all notifications as seen
+		if($notifications) {
+			$connection->query("UPDATE notifications SET viewed=1, viewed_date=CURRENT_TIMESTAMP WHERE email='{$request->email}'");
+		}
+
+		// send response
+		$response = new Response();
+		$response->setResponseSubject("Sus notificaciones");
+		$response->createFromTemplate('basic.tpl', ['notificactions'=>$notifications]);
 		return $response;
 	}
 }
