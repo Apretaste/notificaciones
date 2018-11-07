@@ -2,7 +2,7 @@
 
 /**
  * Service NOTIFICACIONES
- * @author kumahacker <kumahavana@gmail.com>
+ * @author salvipascual
  */
 class Notificaciones extends Service
 {
@@ -15,33 +15,16 @@ class Notificaciones extends Service
 	public function _main(Request $request)
 	{
 		// get the origins of the notifications if passed
-		// i.E.: NOTIFICACIONES pizarra nota chat
-		$origin = "";
-		if($request->query) {
-			foreach (explode(" ", $request->query) as $o) $origins[] = "origin LIKE '$o%'";
-			$origin = implode(" OR ", $origins);
-			$origin = "AND ($origin)";
-		}
+		$origins = [];
+		if($request->query) foreach (explode(" ", $request->query) as $o) $origins[] = $o;
 
-		// create SQL to get notifications
-		$connection = new Connection();
-		$notifications = $connection->query("
-			SELECT *
-			FROM notifications
-			WHERE email='{$request->email}'
-			$origin
-			ORDER BY inserted_date DESC
-			LIMIT 20");
-
-		// mark all notifications as seen
-		if($notifications) {
-			$connection->query("UPDATE notifications SET viewed=1, viewed_date=CURRENT_TIMESTAMP WHERE email='{$request->email}'");
-		}
+		// get notifications
+		$notifications = Utils::getNotifications($request->userId, 20, $origins);
 
 		// send response
 		$response = new Response();
 		$response->setResponseSubject("Sus notificaciones");
-		$response->createFromTemplate('basic.tpl', ['notificactions'=>$notifications]);
+		$response->createFromTemplate('basic.tpl', ['notificactions' => $notifications]);
 		return $response;
 	}
 }
