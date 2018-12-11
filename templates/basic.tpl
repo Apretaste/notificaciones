@@ -1,6 +1,4 @@
 {if $notificactions}
-	<h1>Ultimas notificaciones</h1>
-
 	<table width="100%" cellpadding="5" cellspacing="0">
 		{foreach from=$notificactions item=notif}
 		<tr  {if $notif@iteration is even}bgcolor="#F2F2F2"{/if}>
