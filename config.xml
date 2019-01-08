@@ -1,8 +1,0 @@
-<service>
-	<serviceName>notificaciones</serviceName>
-	<serviceDescription>Le muestra sus ultimas notificaciones sin leer</serviceDescription>
-	<creatorEmail>kumahavana@gmail.com</creatorEmail>
-	<serviceCategory>otros</serviceCategory>
-	<tpl-version>1</tpl-version>
-	<listed>0</listed>
-</service>

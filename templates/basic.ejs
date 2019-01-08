@@ -1,24 +1,15 @@
-<%if(data.notificactions.length>0){%>
+<%if(notificactions.length>0){%>
 <ul class="collection">
-	<%data.notificactions.forEach((notification)=>{%>
+	<%notificactions.forEach((notification)=>{%>
 	<%let date = new Date(notification.inserted_date);%>
 	<li class="collection-item avatar <%if(notification.viewed==0){%>green lighten-4<%}%>" id="<%=date.getTime()%>">
-		<img src="{$APP_ASSETS}<%=notification.image%>" alt="<%=notification.origin%>" class="circle">
+		<img src="{{APP_RESOURCES}}<%=notification.image%>" alt="<%=notification.origin%>" class="circle">
 		<span class="title"><%=notification.origin%></span>
 		<p><%=date.toDateString()+', '+date.toLocaleTimeString();%><br>
 			<%=notification.text%>
 		</p>
+		<!--a href="#!" onclick="delete(notification.id)" class="secondary-content"><i class="material-icons red-text">clear</i></a-->
 	</li>
 	<%});%>
 </ul>
 <%}%>
-
-<script>
-	data.notificactions.forEach((notification) => {
-		let date = new Date(notification.inserted_date);
-		$('#'+date.getTime()).click(() => {
-			apretaste.doaction(notification.link, false, '', true ,'');
-			return false;
-		});
-	});	
-<\/script>
