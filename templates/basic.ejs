@@ -1,9 +1,9 @@
-<%if(notificactions.length>0){%>
+<%if(notifications.length>0){%>
 <ul class="collection">
-	<%notificactions.forEach((notification)=>{%>
+	<%notifications.forEach((notification)=>{%>
 	<%let date = new Date(notification.inserted_date);%>
 	<li class="collection-item avatar <%if(notification.viewed==0){%>green lighten-4<%}%>" id="<%=date.getTime()%>">
-		<img src="{{APP_RESOURCES}}<%=notification.image%>" alt="<%=notification.origin%>" class="circle">
+		<img src="{{APP_IMAGE_PATH}}/<%=notification.image%>" alt="<%=notification.origin%>" class="circle">
 		<span class="title"><%=notification.origin%></span>
 		<p><%=date.toDateString()+', '+date.toLocaleTimeString();%><br>
 			<%=notification.text%>
