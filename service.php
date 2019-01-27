@@ -31,5 +31,10 @@ class Service
 	{
 		// mark notification as read
 		Connection::query("UPDATE notification SET `read`=CURRENT_TIMESTAMP WHERE id={$request->input->data->id}");
+
+		// decrease the number of notifications
+		if($request->person->notifications > 0) {
+			Connection::query("UPDATE person SET notifications=notifications-1 WHERE id={$request->person->id}");
+		}
 	}
 }
