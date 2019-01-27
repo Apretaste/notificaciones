@@ -2,7 +2,7 @@
 	<h1>Notificaciones</h1>
 	<ul class="collection">
 		<% notifications.forEach(function(note){ %>
-			<li id="<%= note.id %>" class="collection-item avatar no-left-padding <% if(note.alert==1){ %>red lighten-5<% } %>">
+			<li id="<%= note.id %>" class="collection-item avatar <% if(note.alert==1){ %>red lighten-5<% } %>">
 				<!-- ICON -->
 				<i class="material-icons circle"><%= note.icon %></i>
 
