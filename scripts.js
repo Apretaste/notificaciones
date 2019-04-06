@@ -43,7 +43,7 @@ function showScreensBasedOnCount() {
 //
 
 function callbackDeleteNotification(data) {
-	$('#'+data.id).fadeOut(function() {
+	$('#'+data.id).hide(function() {
 		// delete notification
 		totalCountOfNotifications--;
 
