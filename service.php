@@ -5,6 +5,7 @@ class Service
 	/**
 	 * Get the list of notifications
 	 *
+	 * @author salvipascual
 	 * @param Request
 	 * @param Response
 	 * */
@@ -24,6 +25,7 @@ class Service
 	/**
 	 * Mark a notifications shown as read
 	 *
+	 * @author salvipascual
 	 * @param Request
 	 * @param Response
 	 * */

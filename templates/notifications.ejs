@@ -1,36 +1,39 @@
-<div id="yes-notes" class="col s12 hidden">
-	<h1>Notificaciones</h1>
-	<ul class="collection">
-		<% notifications.forEach(function(note){ %>
-			<li id="<%= note.id %>" class="collection-item avatar <% if(note.alert==1){ %>red lighten-5<% } %>">
-				<!-- ICON -->
-				<i class="material-icons circle"><%= note.icon %></i>
+<div class="row">
+	<div id="yes-notes" class="col s12">
+		<h1>Notificaciones</h1>
+		<ul class="collection">
+			<% notifications.forEach(function(note){ %>
+				<li id="<%= note.id %>" class="collection-item avatar <% if(note.alert==1){ %>red lighten-5<% } %>">
+					<!-- ICON -->
+					<i class="material-icons circle"><%= note.icon %></i>
 
-				<span>
-					<!-- SERVICE AND DATE -->
-					<small>
-						<%= note.service.charAt(0).toUpperCase() + note.service.substr(1); %>
-						&nbsp;<b>&middot;</b>&nbsp;
-						<%= note.inserted %>
-					</small><br/>
+					<span>
+						<!-- SERVICE AND DATE -->
+						<small>
+							<%= note.service.charAt(0).toUpperCase() + note.service.substr(1); %>
+							&nbsp;<b>&middot;</b>&nbsp;
+							<%= note.inserted %>
+						</small><br/>
 
-					<!-- TEXT -->
-					<% if(note.link) { %>
-						<a href="#!" onclick="apretaste.send(<%= note.link %>)"><%= note.text %></a>
-					<% } else { %>
-						<%= note.text %>
-					<% } %>
-				</span>
+						<!-- TEXT -->
+						<% if(note.link) { %>
+							<a href="#!" onclick="apretaste.send(<%= note.link %>)"><%= note.text %></a>
+						<% } else { %>
+							<%= note.text %>
+						<% } %>
+					</span>
 
-				<!-- DELETE BUTTON-->
-				<a href="#!" class="secondary-content" onclick="deleteNotification('<%= note.id %>')"><i class="material-icons">delete</i></a>
-			</li>
-		<% }) %>
-	</ul>
+					<!-- DELETE BUTTON-->
+					<a href="#!" class="secondary-content" onclick="deleteNotification('<%= note.id %>')"><i class="material-icons">delete</i></a>
+				</li>
+			<% }) %>
+		</ul>
+	</div>
+
+	<div id="no-notes" class="col s12 center-align hidden">
+		<h1>Nada por leer</h1>
+		<i class="material-icons large">notifications_off</i>
+		<p>Por ahora usted no tiene ninguna notificación sin leer.</p>
+	</div>
 </div>
 
-<div id="no-notes" class="col s12 center-align hidden">
-	<h1>Nada por leer</h1>
-	<i class="material-icons large">notifications_off</i>
-	<p>Por ahora usted no tiene ninguna notificación sin leer.</p>
-</div>
