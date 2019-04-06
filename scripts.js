@@ -1,9 +1,13 @@
+// notifications counter
+var totalCountOfNotifications = 0;
+
 //
 // ON LOAD FUNCTIONS
 //
 
 $(document).ready(function(){
-	showScreensBasedOnCount(notifications.length);
+	totalCountOfNotifications = notifications.length;
+	showScreensBasedOnCount();
 });
 
 //
@@ -24,8 +28,8 @@ function deleteNotification(id) {
 }
 
 // display the notifications or the message based on the count
-function showScreensBasedOnCount(count) {
-	if(count <= 0 ) {
+function showScreensBasedOnCount() {
+	if(totalCountOfNotifications <= 0 ) {
 		$('#no-notes').show();
 		$('#yes-notes').hide();
 	} else {
@@ -39,12 +43,11 @@ function showScreensBasedOnCount(count) {
 //
 
 function callbackDeleteNotification(data) {
-	// delete notification
 	$('#'+data.id).fadeOut(function() {
-		$(this).remove();
+		// delete notification
+		totalCountOfNotifications--;
 
 		// show message if all notifications were deleted
-		var count = $("ul.collection li").length;
-		showScreensBasedOnCount(count);
+		showScreensBasedOnCount();
 	});
 }
