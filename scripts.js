@@ -16,15 +16,19 @@ $(document).ready(function(){
 
 // send the notificationd to be deleted
 function deleteNotification(id) {
+	// delete from the backend
 	apretaste.send({
 		command: 'NOTIFICACIONES LEER',
 		data: {id: id},
-		redirect: false,
-		callback: {
-			name: "callbackDeleteNotification", 
-			data: {id: id}
-		}
+		redirect: false
 	});
+
+	// delete from screen and decrease counter
+	$('#'+id).hide();
+	totalCountOfNotifications--;
+
+	// show message if all notifications were deleted
+	showScreensBasedOnCount();
 }
 
 // display the notifications or the message based on the count
@@ -36,18 +40,4 @@ function showScreensBasedOnCount() {
 		$('#no-notes').hide();
 		$('#yes-notes').show();
 	}
-}
-
-//
-// CALLBACKS
-//
-
-function callbackDeleteNotification(data) {
-	$('#'+data.id).hide(function() {
-		// delete notification
-		totalCountOfNotifications--;
-
-		// show message if all notifications were deleted
-		showScreensBasedOnCount();
-	});
 }
