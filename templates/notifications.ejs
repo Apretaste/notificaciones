@@ -2,7 +2,8 @@
 	<div id="yes-notes" class="col s12">
 		<h1>Notificaciones</h1>
 		<ul class="collection">
-			<% notifications.forEach(function(note){ %>
+			<% for(var i=0; i<notifications.length; i++) {
+				var note = notifications[i]; %>
 				<li id="<%= note.id %>" class="collection-item avatar <% if(note.alert==1){ %>red lighten-5<% } %>">
 					<!-- ICON -->
 					<i class="material-icons circle"><%= note.icon %></i>
@@ -13,7 +14,9 @@
 							<%= note.service.charAt(0).toUpperCase() + note.service.substr(1); %>
 							&nbsp;<b>&middot;</b>&nbsp;
 							<%= note.inserted %>
-						</small><br/>
+						</small>
+
+						<br/>
 
 						<!-- TEXT -->
 						<% if(note.link) { %>
@@ -26,7 +29,7 @@
 					<!-- DELETE BUTTON-->
 					<a href="#!" class="secondary-content" onclick="deleteNotification('<%= note.id %>')"><i class="material-icons">delete</i></a>
 				</li>
-			<% }) %>
+			<% } %>
 		</ul>
 	</div>
 

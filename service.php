@@ -8,7 +8,7 @@ class Service
 	 * @author salvipascual
 	 * @param Request
 	 * @param Response
-	 * */
+	 */
 	public function _main(Request $request, Response $response)
 	{
 		// get all unread notifications
@@ -19,7 +19,10 @@ class Service
 			AND `read` IS NULL
 			ORDER BY inserted DESC");
 
-		foreach($notifications as $notification) $notification->inserted = date('d/m/Y h:i a', strtotime($notification->inserted));
+		// format date for the notification
+		foreach($notifications as $notification) {
+			$notification->inserted = date('d/m/Y h:i a', strtotime($notification->inserted));
+		}
 
 		// send data to the view
 		$response->setTemplate('notifications.ejs', ["notifications"=>$notifications]);
@@ -31,7 +34,7 @@ class Service
 	 * @author salvipascual
 	 * @param Request
 	 * @param Response
-	 * */
+	 */
 	public function _leer(Request $request, Response $response)
 	{
 		// mark notification as read
