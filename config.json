@@ -1,6 +1,6 @@
 {
 	"name": "notificaciones",
-	"version": "8",
+	"version": 9,
 	"description": "Le muestra sus notificaciones sin leer",
 	"category": "otros",
 	"creator": "salvi@apretaste.org",
