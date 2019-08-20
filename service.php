@@ -16,7 +16,7 @@ class Service
 			SELECT id,`to`,service,icon,`text`,link,alert,inserted 
 			FROM notification
 			WHERE `to` = {$request->person->id} 
-			AND `read` IS NULL
+			AND hidden = 0
 			ORDER BY inserted DESC");
 
 		// format date for the notification
@@ -38,7 +38,7 @@ class Service
 	public function _leer(Request $request, Response $response)
 	{
 		// mark notification as read
-		Connection::query("UPDATE notification SET `read`=CURRENT_TIMESTAMP WHERE id={$request->input->data->id}");
+		Connection::query("UPDATE notification SET `read`=CURRENT_TIMESTAMP, hidden = 1 WHERE id={$request->input->data->id}");
 
 		// decrease the number of notifications
 		if($request->person->notifications > 0) {
