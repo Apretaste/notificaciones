@@ -13,7 +13,7 @@ class Service
 	{
 		// get all unread notifications
 		$notifications = Connection::query("
-			SELECT id,`to`,service,icon,`text`,link,alert,inserted 
+			SELECT id, service, icon, `text`, link, alert, inserted
 			FROM notification
 			WHERE `to` = {$request->person->id} 
 			AND hidden = 0
@@ -21,6 +21,7 @@ class Service
 
 		// format date for the notification
 		foreach($notifications as $notification) {
+			$notification->text = base64_encode($notification->text);
 			$notification->inserted = date('d/m/Y h:i a', strtotime($notification->inserted));
 		}
 

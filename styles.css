@@ -1,3 +1,7 @@
 .hidden {
 	display: none;
 }
+
+.collection-item {
+	padding-right: 40px !important;
+}

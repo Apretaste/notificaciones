@@ -2,9 +2,8 @@
 	<div id="yes-notes" class="col s12">
 		<h1>Notificaciones</h1>
 		<ul class="collection">
-			<% for(var i=0; i<notifications.length; i++) {
-				var note = notifications[i]; %>
-				<li id="<%= note.id %>" class="collection-item avatar <% if(note.alert==1){ %>red lighten-5<% } %>">
+			<% notifications.forEach(function(note) { %>
+				<li id="<%= note.id %>" class="collection-item avatar <% if(note.alert==1){ %>blue-grey lighten-5<% } %>">
 					<!-- ICON -->
 					<i class="material-icons circle"><%= note.icon %></i>
 
@@ -20,16 +19,16 @@
 
 						<!-- TEXT -->
 						<% if(note.link) { %>
-							<a href="#!" onclick="apretaste.send(<%= note.link %>)"><%= note.text %></a>
+							<a href="#!" onclick="apretaste.send(<%= note.link %>)"><%= atob(note.text) %></a>
 						<% } else { %>
-							<%= note.text %>
+							<%= atob(note.text) %>
 						<% } %>
 					</span>
 
 					<!-- DELETE BUTTON-->
 					<a href="#!" class="secondary-content" onclick="deleteNotification('<%= note.id %>')"><i class="material-icons">delete</i></a>
 				</li>
-			<% } %>
+			<% }) %>
 		</ul>
 	</div>
 
