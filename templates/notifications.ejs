@@ -19,9 +19,9 @@
 
 						<!-- TEXT -->
 						<% if(note.link) { %>
-							<a href="#!" onclick="apretaste.send(<%= note.link %>)"><%= atob(note.text) %></a>
+							<a href="#!" onclick="apretaste.send(<%= note.link %>)"><%= note.text %></a>
 						<% } else { %>
-							<%= atob(note.text) %>
+							<%= note.text %>
 						<% } %>
 					</span>
 

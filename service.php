@@ -21,7 +21,6 @@ class Service
 
 		// format date for the notification
 		foreach($notifications as $notification) {
-			$notification->text = base64_encode($notification->text);
 			$notification->inserted = date('d/m/Y h:i a', strtotime($notification->inserted));
 		}
 
