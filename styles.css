@@ -5,3 +5,7 @@
 .collection-item {
 	padding-right: 40px !important;
 }
+
+.btn-block {
+	width: 100%;
+}

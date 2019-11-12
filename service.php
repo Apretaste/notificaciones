@@ -3,46 +3,71 @@
 class Service
 {
 	/**
-	 * Get the list of notifications
+	 * Entry point for the service
 	 *
 	 * @author salvipascual
 	 * @param Request
 	 * @param Response
 	 */
-	public function _main(Request $request, Response $response)
+	public function _main (Request $request, Response $response)
 	{
-		// get all unread notifications
-		$notifications = Connection::query("
-			SELECT id, service, icon, `text`, link, alert, inserted
-			FROM notification
-			WHERE `to` = {$request->person->id} 
-			AND hidden = 0
-			ORDER BY inserted DESC");
-
-		// format date for the notification
-		foreach($notifications as $notification) {
-			$notification->inserted = date('d/m/Y h:i a', strtotime($notification->inserted));
-		}
-
-		// send data to the view
-		$response->setTemplate('notifications.ejs', ["notifications"=>$notifications]);
+		// return all alerts
+		$this->_alerts($request, $response);
 	}
 
 	/**
-	 * Mark a notifications shown as read
+	 * Get the list of alerts
 	 *
 	 * @author salvipascual
 	 * @param Request
 	 * @param Response
 	 */
-	public function _leer(Request $request, Response $response)
+	public function _alerts (Request $request, Response $response)
 	{
-		// mark notification as read
-		Connection::query("UPDATE notification SET `read`=CURRENT_TIMESTAMP, hidden = 1 WHERE id={$request->input->data->id}");
+		// get all unread alerts
+		$alerts = Notifications::getAlerts($request->person->id);
 
-		// decrease the number of notifications
-		if($request->person->notifications > 0) {
-			Connection::query("UPDATE person SET notifications=notifications-1 WHERE id={$request->person->id}");
-		}
+		// send data to the view
+		$response->setTemplate('alerts.ejs', ["alerts" => $alerts]);
+	}
+
+	/**
+	 * Get the list of user logs
+	 *
+	 * @author salvipascual
+	 * @param Request
+	 * @param Response
+	 */
+	public function _logs (Request $request, Response $response)
+	{
+		// get last 50 logs
+		$logs = Notifications::getLogs($request->person->id, 50);
+
+		// send data to the view
+		$response->setTemplate('logs.ejs', ["logs" => $logs]);
+	}
+
+	/**
+	 * Mark a alerts shown as read
+	 *
+	 * @author salvipascual
+	 * @param Request
+	 * @param Response
+	 */
+	public function _leer (Request $request, Response $response)
+	{
+		Notifications::markAlertAsRead($request->input->data->id, $request->person->id);
+	}
+
+	/**
+	 * Mark all alerts as read
+	 *
+	 * @author salvipascual
+	 * @param Request
+	 * @param Response
+	 */
+	public function _borrar (Request $request, Response $response)
+	{
+		Notifications::markAllAlertsAsRead($request->person->id);
 	}
 }

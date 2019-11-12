@@ -1,0 +1,55 @@
+<div class="row">
+	<div class="col s12">
+		<ul class="tabs tabs-fixed-width">
+			<li class="tab"><a href="#" class="active">Alertas</a></li>
+			<li class="tab"><a href="#" onclick="apretaste.send({command: 'NOTIFICACIONES LOGS'})">Logs</a></li> 
+		</ul>
+	</div>
+</div>
+
+<div class="row">
+	<div id="yes-notes" class="col s12">
+		<ul class="collection">
+			<% alerts.forEach(function(item) { %>
+				<li id="<%= item.id %>" class="collection-item avatar <% if(item.alert==1){ %>blue-grey lighten-5<% } %>">
+					<!-- ICON -->
+					<i class="material-icons circle"><%= item.icon %></i>
+
+					<span>
+						<!-- SERVICE AND DATE -->
+						<small>
+							<%= item.service.charAt(0).toUpperCase() + item.service.substr(1); %>
+							&nbsp;<b>&middot;</b>&nbsp;
+							<%= item.inserted %>
+						</small>
+
+						<br/>
+
+						<!-- TEXT -->
+						<% if(item.link) { %>
+							<a href="#!" onclick="apretaste.send(<%= item.link %>)"><%= item.text %></a>
+						<% } else { %>
+							<%= item.text %>
+						<% } %>
+					</span>
+
+					<!-- DELETE BUTTON-->
+					<a href="#!" class="secondary-content" onclick="deleteAlert('<%= item.id %>')"><i class="material-icons">delete</i></a>
+				</li>
+			<% }) %>
+		</ul>
+
+		<!-- DELETE ALL BUTTON -->
+		<a class="waves-effect waves-light btn btn-block grey" href="#!" onclick="deleteAllAlerts()">
+			<i class="material-icons left">delete</i>
+			Borrar todas las alertas
+		</a>
+	</div>
+
+	<div id="no-notes" class="col s12 center-align hidden">
+		<h1>No hay alertas</h1>
+		<i class="material-icons large">notifications_off</i>
+		<p>¡Hurray! Por ahora usted no tiene ninguna alerta sin leer.</p>
+	</div>
+</div>
+

@@ -1,7 +1,6 @@
 {
 	"name": "notificaciones",
-	"version": 11,
-	"description": "Le muestra sus notificaciones sin leer",
+	"description": "Le muestra sus notificaciones sin leer y los logs de usuario",
 	"category": "otros",
 	"creator": "salvi@apretaste.org",
 	"listed": false
