@@ -3,5 +3,6 @@
 	"description": "Le muestra sus notificaciones sin leer y los logs de usuario",
 	"category": "otros",
 	"creator": "salvi@apretaste.org",
-	"listed": false
+	"listed": false,
+	"version": 1
 }
