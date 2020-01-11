@@ -4,5 +4,6 @@
 	"category": "otros",
 	"creator": "salvi@apretaste.org",
 	"listed": false,
-	"version": 1
+	"guest": true,
+	"caption": "Notificationes"
 }
