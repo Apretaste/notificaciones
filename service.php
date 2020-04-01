@@ -11,8 +11,6 @@ class Service
 	 *
 	 * @param Request $request
 	 * @param Response $response
-	 *
-	 * @throws \Framework\Alert
 	 * @author salvipascual
 	 */
 	public function _main(Request $request, Response &$response)
