@@ -14,7 +14,7 @@
 				<% logs.forEach(function(item) { %>
 					<li class="collection-item">
 						<div>
-							<small><%= item.inserted %></small><br/>
+							<small><%= moment(item.inserted).format('D [de] MMMM [del] YYYY, h:mm a') %></small><br/>
 							<%= item.text %>
 						</div>
 					</li>
