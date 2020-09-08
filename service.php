@@ -13,7 +13,7 @@ class Service
 	 * @param Response $response
 	 * @author salvipascual
 	 */
-	public function _main(Request $request, Response &$response)
+	public function _main(Request $request, Response $response)
 	{
 		// return all alerts
 		$this->_alerts($request, $response);
@@ -26,10 +26,15 @@ class Service
 	 * @param Response $response
 	 * @author salvipascual
 	 */
-	public function _alerts(Request $request, Response &$response)
+	public function _alerts(Request $request, Response $response)
 	{
 		// get all unread alerts
 		$alerts = Notifications::getAlerts($request->person->id);
+
+		// error if there any no alerts 
+		if(empty($alerts)) {
+			return $response->setTemplate('empty.ejs');
+		}
 
 		// send data to the view
 		$response->setTemplate('alerts.ejs', ['alerts' => $alerts]);
@@ -42,7 +47,7 @@ class Service
 	 * @param Response $response
 	 * @author salvipascual
 	 */
-	public function _logs(Request $request, Response &$response)
+	public function _logs(Request $request, Response $response)
 	{
 		// get last 50 logs
 		$logs = Notifications::getLogs($request->person->id, 50);
@@ -58,7 +63,7 @@ class Service
 	 * @param Request
 	 * @param Response
 	 */
-	public function _leer(Request $request, Response &$response)
+	public function _leer(Request $request, Response $response)
 	{
 		Notifications::markAlertAsRead($request->input->data->id, $request->person->id);
 	}
@@ -70,8 +75,12 @@ class Service
 	 * @param Request
 	 * @param Response
 	 */
-	public function _borrar(Request $request, Response &$response)
+	public function _borrar(Request $request, Response $response)
 	{
+		// clear notifications
 		Notifications::markAllAlertsAsRead($request->person->id);
+
+		// return all alerts
+		$this->_alerts($request, $response);
 	}
 }

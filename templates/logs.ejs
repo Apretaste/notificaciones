@@ -14,7 +14,8 @@
 				<% logs.forEach(function(item) { %>
 					<li class="collection-item">
 						<div>
-							<small><%= moment(item.inserted).format('D [de] MMMM [del] YYYY, h:mm a') %></small><br/>
+							<span class="chip tiny clear grey-text text-darken-2"><i class="fas fa-calendar"></i> <%= moment(item.inserted).format('D [de] MMMM [del] YYYY, h:mm A') %></span>
+							<br>
 							<%= item.text %>
 						</div>
 					</li>
