@@ -1,6 +1,9 @@
 // alerts counter
+//
 var totalCountOfAlerts = 0;
 
+// on start ...
+//
 $(document).ready(function(){
 	// get the notifications counter
 	totalCountOfAlerts = (typeof alerts=='undefined') ? 0 : alerts.length;
@@ -9,8 +12,9 @@ $(document).ready(function(){
 	$('.tabs').tabs();
 });
 
-// send the notificationd to be deleted
-function deleteAlert(id) {
+// delete the alert group
+//
+function deleteAlertGroup(groupId) {
 	// if is the last notification, update the app counter 
 	if(totalCountOfAlerts <= 1 ) {
 		deleteAllAlerts();
@@ -20,16 +24,17 @@ function deleteAlert(id) {
 	// else delete notification from the backend
 	apretaste.send({
 		command: 'NOTIFICACIONES LEER',
-		data: {id: id},
+		data: {id: groupId},
 		redirect: false
 	});
 
 	// and from the view and decrease counter
-	$('#'+id).hide();
+	$('#'+groupId).hide();
 	totalCountOfAlerts--;
 }
 
-// clean all the notifications
+// clean all the alerts
+//
 function deleteAllAlerts() {
 	apretaste.send({command: 'NOTIFICACIONES BORRAR'});
 }

@@ -11,14 +11,17 @@
 	<div class="col s12">
 		<ul class="collection">
 			<% alerts.forEach(function(item) { %>
-				<li id="<%= item.id %>"
-					class="collection-item avatar <% if(item.alert == 1){ %>blue-grey lighten-5<% } %>">
+				<li id="<%= item.group_id %>" class="collection-item avatar">
 					<!-- ICON -->
 					<i class="material-icons circle"><%= item.icon %></i>
 
 					<span>
+						<% if(item.cnt > 1) { %>
+							<span class="chip tiny grey-text text-darken-2"><i class="fas fa-bell"></i> <%= item.cnt %></span>
+						<% } %>
+
 						<!-- SERVICE AND DATE -->
-						<span class="chip tiny clear grey-text text-darken-2"><i class="fas fa-calendar"></i> <%= moment(item.inserted).format('D [de] MMMM [del] YYYY, h:mm A') %></span>
+						<span class="chip tiny clear grey-text text-darken-2"><i class="fas fa-calendar"></i> <%= moment(item.inserted).format('D [de] MMM h:mm A') %></span>
 
 						<!-- TEXT -->
 						<div>
@@ -31,7 +34,7 @@
 					</span>
 
 					<!-- DELETE BUTTON-->
-					<a href="#!" class="secondary-content" onclick="deleteAlert('<%= item.id %>')"><i class="material-icons">delete</i></a>
+					<a href="#!" class="secondary-content" onclick="deleteAlertGroup('<%= item.group_id %>')"><i class="material-icons">delete</i></a>
 				</li>
 			<% }) %>
 		</ul>

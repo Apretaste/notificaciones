@@ -65,7 +65,7 @@ class Service
 	 */
 	public function _leer(Request $request, Response $response)
 	{
-		Notifications::markAlertAsRead($request->input->data->id, $request->person->id);
+		Notifications::markAlertGroupAsRead($request->input->data->id, $request->person->id);
 	}
 
 	/**
