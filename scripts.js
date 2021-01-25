@@ -25,7 +25,8 @@ function deleteAlertGroup(groupId) {
 	apretaste.send({
 		command: 'NOTIFICACIONES LEER',
 		data: {id: groupId},
-		redirect: false
+		redirect: false,
+		showLoading: false
 	});
 
 	// and from the view and decrease counter
@@ -36,5 +37,5 @@ function deleteAlertGroup(groupId) {
 // clean all the alerts
 //
 function deleteAllAlerts() {
-	apretaste.send({command: 'NOTIFICACIONES BORRAR'});
+	apretaste.send({command: 'NOTIFICACIONES BORRAR', showLoading: false});
 }
