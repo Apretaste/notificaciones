@@ -29,7 +29,7 @@ class Service
 	public function _alerts(Request $request, Response $response)
 	{
 		// get all unread alerts
-		$alerts = Notifications::getAlerts($request->person->id);
+		$alerts = Notifications::getAlerts($request->person->id, 100);
 
 		// error if there any no alerts 
 		if(empty($alerts)) {
