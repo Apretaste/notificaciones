@@ -5,13 +5,15 @@
 			<li class="tab"><a href="#" onclick="apretaste.send({command: 'NOTIFICACIONES LOGS'})">Logs</a></li>
 		</ul>
 	</div>
-</div>
 
-<div class="row">
+	<div class="col s12">
+		<div id="alertCounters" class="scrolleable"></div>
+	</div>
+
 	<div class="col s12">
 		<ul class="collection">
 			<% alerts.forEach(function(item) { %>
-				<li id="<%= item.group_id %>" class="collection-item avatar">
+				<li id="<%= item.group_id %>" class="collection-item avatar" icon="<%= item.icon %>">
 					<!-- ICON -->
 					<i class="material-icons circle"><%= item.icon %></i>
 
@@ -34,15 +36,19 @@
 					</span>
 
 					<!-- DELETE BUTTON-->
-					<a href="#!" class="secondary-content" onclick="deleteAlertGroup('<%= item.group_id %>')"><i class="material-icons">delete</i></a>
+					<a href="#!" class="secondary-content green-text" onclick="deleteAlertGroup('<%= item.group_id %>')"><i class="material-icons">delete</i></a>
 				</li>
 			<% }) %>
 		</ul>
-
-		<!-- DELETE ALL BUTTON -->
-		<a class="waves-effect waves-light btn btn-block grey" href="#!" onclick="deleteAllAlerts()">
-			<i class="material-icons left">delete</i>
-			Borrar todas las alertas
-		</a>
 	</div>
+</div>
+
+<!-- DELETE ALL BUTTON -->
+
+<div class="bottom-space"></div>
+
+<div id="btn" class="fixed-action-btn">
+	<a class="btn-floating btn-large green" href="#!" onclick="if(confirm('¿Está seguro de limpiar sus '+totalCountOfAlerts+' alertas?')) deleteAllAlerts()">
+		<i class="fas fa-trash"></i>
+	</a>
 </div>

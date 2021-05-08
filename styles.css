@@ -1,9 +1,18 @@
+/* GENRAL */
+
 .collection-item {
 	padding-right: 40px !important;
 }
 
-.btn-block {
-	width: 100%;
+#alertCounters {
+	margin-top: 10px;
+}
+
+/* VERTICAL SCROLL */
+
+.scrolleable {
+	overflow-x: auto;
+	white-space: nowrap;
 }
 
 /* TAGS */
@@ -31,4 +40,10 @@
 	margin: 0px;
 	padding: 0px;
 	background-color: transparent;
+}
+
+/* FLOAT BUTTON */
+
+.bottom-space {
+	margin-bottom: 80px;
 }
