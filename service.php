@@ -38,10 +38,12 @@ class Service
 
 		array_map(function($item) {
 			$link = json_decode($item->link);
-			if (!isset($link->data)) $link->data = new \stdClass;
-			if (!is_object($link->data)) $link->data = new \stdClass;
-			$link->data->nocache = date("Ymdhis");
-			$item->link = json_encode($link);
+			if (is_object($link)) {
+				if (!isset($link->data)) $link->data = (object) [];
+				if (!is_object($link->data)) $link->data = (object) [];
+				$link->data->nocache = date("Ymdhis");
+				$item->link = json_encode($link);
+			}
 		}, $alerts);
 
 		// send data to the view
