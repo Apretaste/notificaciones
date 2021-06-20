@@ -36,6 +36,12 @@ class Service
 			return $response->setTemplate('empty.ejs');
 		}
 
+		array_map(function($item) {
+			$link = json_decode($item->link);
+			$link->data->nocache = date("Ymdhis");
+			$item->link = json_encode($link);
+		}, $alerts);
+
 		// send data to the view
 		$response->setTemplate('alerts.ejs', ['alerts' => $alerts]);
 	}
